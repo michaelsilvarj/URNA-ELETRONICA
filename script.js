@@ -13,7 +13,7 @@ let numeros =  document.querySelector('.d-1-3');
 
 //Variaveis de controle de ambiente
 let etapaAtual = 0;
-
+let numero = '';
 
 function comecarEtapa(){
 
@@ -21,7 +21,14 @@ function comecarEtapa(){
 
     let numeroHTML = '';
 
-    for(let i=0; i<etapas.numeros; i++){}
+    for(let i=0; i<etapa.numeros; i++){
+
+        if (i === 0) {
+            numeroHTML += '<div class="numero pisca"></div>';
+        } else {
+            numeroHTML += '<div class="numero"></div>';
+        }       
+    }
 
     seuVotoPara.style.display = 'none';
     cargo.innerHtml = etapa.titulo;
@@ -32,8 +39,32 @@ function comecarEtapa(){
 
 }
 
+function atualizaInterface(){
+
+    
+}
+
 function clicou (n){
-    alert(`Clicou em ${n}`);
+
+    let elnumero = document.querySelector('.numero.pisca');
+
+    // verificando se a div está vazia para preenchela
+    if (elnumero != null) {
+        elnumero.innerHTML = n;
+        numero = `${numero}${n}`;
+        elnumero.classList.remove('pisca');
+        if ( elnumero.nextElementSibling != null) {
+            elnumero.nextElementSibling.classList.add('pisca');
+           
+        } else {
+            atualizaInterface();
+        }
+      //  bipTeclas();    
+    }
+   
+
+   
+    
 }
 function branco(){
     alert('Clicou em BRANCO !');
@@ -47,8 +78,8 @@ function corrige(){
 function confirma(){
     
     
-    //alert('Clicou em CONFIRMA !');
-    bipConfirmar();
+    
+   // bipConfirmar();
 }
 
 comecarEtapa();
