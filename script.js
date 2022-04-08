@@ -41,6 +41,17 @@ function comecarEtapa(){
 
 function atualizaInterface(){
 
+    let etapa = etapas[etapaAtual];
+    let canditado = etapa.canditado.filter((item)=>{
+        //compara se o numero digitado é igual ao do canditado
+        if (item.numero === numero) {
+            returntrue;
+        } else {
+            return false;
+        }
+    });
+
+
     
 }
 
