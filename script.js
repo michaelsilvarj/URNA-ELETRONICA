@@ -42,16 +42,40 @@ function comecarEtapa(){
 function atualizaInterface(){
 
     let etapa = etapas[etapaAtual];
-    let canditado = etapa.canditado.filter((item)=>{
+    let canditado = etapa.candidatos.filter((item)=>{
         //compara se o numero digitado é igual ao do canditado
         if (item.numero === numero) {
-            returntrue;
+            return true;
         } else {
             return false;
         }
+        
     });
 
+    //Verifica a existencia de canditado
+    if(canditado.length > 0){
+        canditado = canditado[0];
+        seuVotoPara.style.display = 'block';
+        descricao.innerHTML=  `Nome: ${canditado.nome} <br> Partido: ${canditado.partido}`;
+        aviso.innerHTML.display = 'block';
+        
+        // Exibição de fotos
+        let fotosHTML= '';
+        
+        fotosHTML= '';
+        for(let i in canditado.fotos){
 
+            fotosHTML+= `<div class="d-1-image"> <img src="img/${canditado.fotos[i].src}" alt=""> ${canditado.fotos[i].legenda} </div> `;
+        }
+        lateral.innerHTML = fotosHTML;
+
+        //Exibe voto nulo
+    } else {
+        seuVotoPara.style.display = 'block';
+        aviso.innerHTML.display = 'block';
+        descricao.innerHTML= ' <div class="aviso--grande pisca">VOTO NULO</div>  ';
+    }
+    console.log("canditado",canditado);
     
 }
 

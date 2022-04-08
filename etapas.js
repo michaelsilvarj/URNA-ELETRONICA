@@ -1,13 +1,13 @@
 let etapas = [
     {
-      titulo: "VEREADOR",
+      titulo: 'VEREADOR',
       numeros: 5,
       candidatos: [
         {
-          numero: "38111",
-          nome: "Son Goku",
-          partido: " sayajin",
-          fotos: [{ src: "../img/goku.jpg", legenda: "Vereador" }],
+          numero: '38111',
+          nome: 'Son Goku',
+          partido: 'SAYAJIN',
+          fotos: [{ src: 'goku.jpg', legenda: 'Vereador' }],
         },
         {
           numero: "22222",
