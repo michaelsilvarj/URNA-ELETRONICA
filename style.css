@@ -127,6 +127,9 @@ align-items: center;
 
 .d-1-right{
     width: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
 }
 .d-1-image{
     border: #000 solid 1px;
