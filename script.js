@@ -1,8 +1,3 @@
-//Encurtador de comandos
-let qs = (el) => document.querySelector;
-
-
-
 let seuVotoPara =  document.querySelector('.d-1-1 span');
 let cargo = document.querySelector('.d-1-2 span');
 let descricao = document.querySelector('.d-1-4');
@@ -10,16 +5,19 @@ let aviso =  document.querySelector('.d-2');
 let lateral =  document.querySelector('.d-1-right');
 let numeros =  document.querySelector('.d-1-3');
 
-
 //Variaveis de controle de ambiente
 let etapaAtual = 0;
 let numero = '';
+let votoBranco = false;
 
 function comecarEtapa(){
 
     let etapa = etapas[etapaAtual];
 
     let numeroHTML = '';
+
+    numero = '';
+    votoBranco = false;
 
     for(let i=0; i<etapa.numeros; i++){
 
@@ -36,7 +34,6 @@ function comecarEtapa(){
     aviso.innerHTML.display = 'none';
     lateral.innerHTML = '';
     numeros.innerHTML = numeroHTML;
-
 }
 
 function atualizaInterface(){
@@ -49,7 +46,6 @@ function atualizaInterface(){
         } else {
             return false;
         }
-        
     });
 
     //Verifica a existencia de canditado
@@ -65,7 +61,13 @@ function atualizaInterface(){
         fotosHTML= '';
         for(let i in canditado.fotos){
 
-            fotosHTML+= `<div class="d-1-image"> <img src="img/${canditado.fotos[i].src}" alt=""> ${canditado.fotos[i].legenda} </div> `;
+            if(canditado.fotos[i].small){
+                fotosHTML+= `<div class="d-1-image small"> <img src="img/${canditado.fotos[i].src}" alt=""> ${canditado.fotos[i].legenda} </div> `;
+            } else{
+                fotosHTML+= `<div class="d-1-image"> <img src="img/${canditado.fotos[i].src}" alt=""> ${canditado.fotos[i].legenda} </div> `;
+            }
+
+            
         }
         lateral.innerHTML = fotosHTML;
 
@@ -75,8 +77,7 @@ function atualizaInterface(){
         aviso.innerHTML.display = 'block';
         descricao.innerHTML= ' <div class="aviso--grande pisca">VOTO NULO</div>  ';
     }
-    console.log("canditado",canditado);
-    
+    //console.log("canditado",canditado);
 }
 
 function clicou (n){
@@ -88,37 +89,62 @@ function clicou (n){
         elnumero.innerHTML = n;
         numero = `${numero}${n}`;
         elnumero.classList.remove('pisca');
+
         if ( elnumero.nextElementSibling != null) {
             elnumero.nextElementSibling.classList.add('pisca');
-           
         } else {
             atualizaInterface();
         }
       //  bipTeclas();    
     }
-   
+}
 
-   
-    
-}
 function branco(){
-    alert('Clicou em BRANCO !');
+    
+        numero = '';
+        votoBranco = true;
+        seuVotoPara.style.display = 'block';
+        aviso.innerHTML.display = 'block';
+        numeros.innerHTML = '';
+        lateral.innerHTML = '';
+        descricao.innerHTML= ' <div class="aviso--grande pisca">VOTO EM BRANCO</div>  ';
+
+
 }
+
 function corrige(){
    // bipTeclas();
-    alert('Clicou em CORRIGE !');
+    comecarEtapa();
     
 }
 
 function confirma(){
     
+    let etapa = etapas[etapaAtual];
+    let votoConfirmado = false;
+
+    if (numero.length === etapa.numeros) {
+        votoConfirmado = true;
+        console.log('Voto  CONFIRMADO');
+    } else if(votoBranco === true){
+        votoConfirmado = true;
+        console.log('Voto BRANCO confirmado');
+    }
     
+    if (votoConfirmado){
+        etapaAtual++;
+        if (etapas[etapaAtual] !== undefined) {
+            comecarEtapa();
+        }else{
+            console.log('FIM !');
+        }
+
+    }
     
    // bipConfirmar();
 }
 
 comecarEtapa();
-
 
 // Funções para ativação do audio para confirmar voto e para o clique na digitação das teclas
 function bipTeclas(){
