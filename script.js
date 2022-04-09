@@ -9,6 +9,7 @@ let numeros =  document.querySelector('.d-1-3');
 let etapaAtual = 0;
 let numero = '';
 let votoBranco = false;
+let votos[];
 
 function comecarEtapa(){
 
@@ -125,10 +126,16 @@ function confirma(){
 
     if (numero.length === etapa.numeros) {
         votoConfirmado = true;
-        console.log('Voto  CONFIRMADO');
+        votos.push({
+            etapa: etapas[etapaAtual].titulo,
+            voto: numero,
+        });
     } else if(votoBranco === true){
         votoConfirmado = true;
-        console.log('Voto BRANCO confirmado');
+       votos.push({
+            etapa: etapas[etapaAtual].titulo,
+            voto: 'BRANCO',
+        });
     }
     
     if (votoConfirmado){
@@ -136,7 +143,8 @@ function confirma(){
         if (etapas[etapaAtual] !== undefined) {
             comecarEtapa();
         }else{
-            console.log('FIM !');
+            document.querySelector('.tela').innerHTML= '<div class="aviso--gigante pisca">FIM !</div>';
+            console.log(votos);
         }
 
     }
