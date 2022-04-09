@@ -10,6 +10,7 @@ let etapaAtual = 0;
 let numero = '';
 let votoBranco = false;
 let votos = [];
+let gravar = votos;
 
 function comecarEtapa() {
     let etapa = etapas[etapaAtual];
@@ -130,8 +131,8 @@ function confirma(){
             comecarEtapa();
         }else{
             document.querySelector('.tela').innerHTML= '<div class="aviso--gigante pisca">FIM !</div>';
+            //console.log(votos);
             armazena();
-            console.log(votos);
         }
 
     }
@@ -155,9 +156,17 @@ function bipConfirmar(){
 
 // Armazena dados na urna
 function armazena(){
-    let pdf = new jsPDF()
-    pdf.text(votos);
-    pdf.save('./card/Resultado_Eleicao.pdf');
+   
+    console.log(gravar);
+
+    //Armazena no local storage
+    localStorage.setItem('votos', JSON.stringify(votos));
+
+   // let contagem = localStorage.getItem('votos');
 }
 
+function santinho (){
+    window.open ('santinho.html', '_blank',"width=380,height=400");
+}
 
+santinho();

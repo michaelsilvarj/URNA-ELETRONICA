@@ -1,0 +1,26 @@
+.titulo{
+    margin-left: 130px;  
+}
+
+.container{
+    align-items: center;
+    
+}
+
+.card{
+    border: solid 1px rgb(132, 152, 240);
+    box-shadow: 3px black;
+    width: 300px;
+    padding-right: 110px;  
+    border-radius: 30px;
+    margin-left: 60px;
+    
+}
+
+.vereador{
+    margin-left: 40px;
+}
+
+.prefeito{
+    margin-left: 50px;
+}
